@@ -10,10 +10,10 @@
  * @date  2020-07-22
 */
 
-let maqueencb: Action
-let maqueenmycb: Action
-let maqueene = "1"
-let maqueenparam = 0
+let valoncb: Action
+let valonmycb: Action
+let valone = "1"
+let valonparam = 0
 let alreadyInit = 0
 let IrPressEvent = 0
 const MOTER_ADDRESSS = 0x10
@@ -33,8 +33,8 @@ interface KV {
     action: Action;
 }
 
-//% weight=10 color=#008B00 icon="\uf136" block="Maqueen"
-namespace maqueen {
+//% weight=10 color=#008B00 icon="\uf136" block="Valon"
+namespace valon {
 
     let kbCallback: KV[] = []
 
@@ -103,7 +103,6 @@ namespace maqueen {
     /**
      * Read ultrasonic sensor.
      */
-
     //% blockId=ultrasonic_sensor block="read ultrasonic sensor |%unit "
     //% weight=95
     export function Ultrasonic(unit: PingUnit, maxCmDistance = 500): number {
@@ -130,9 +129,8 @@ namespace maqueen {
     }
 
     /**
-     * Set the direction and speed of Maqueen motor.
+     * Set the direction and speed of Valon motor.
      */
-
     //% weight=90
     //% blockId=motor_MotorRun block="motor|%index|move|%Dir|at speed|%speed"
     //% speed.min=0 speed.max=255
@@ -163,7 +161,7 @@ namespace maqueen {
     }
 
     /**
-     * Stop the Maqueen motor.
+     * Stop the Valon motor.
      */
     //% weight=20
     //% blockId=motor_motorStop block="motor |%motors stop"

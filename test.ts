@@ -1,6 +1,6 @@
 // Add your code here
-maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, 100)
+valon.motorRun(valon.Motors.M1, valon.Dir.CW, 100)
 basic.pause(1000)
-maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CW, 100)
+valon.motorRun(valon.Motors.M2, valon.Dir.CW, 100)
 basic.pause(1000)
 
