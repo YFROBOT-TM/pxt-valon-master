@@ -430,7 +430,7 @@ namespace valon {
          * Shows all LEDs to a given color (range 0-255 for r, g, b).
          * @param rgb RGB color of the LED. eg:255
          */
-        //% blockId="eyes_set_color" block="%eyes|show color %rgb"
+        //% blockId="eyes_set_color" block="%eyes|show color %rgb=neopixel_colors"
         //% eyes.defl=eyes
         //% weight=40
         //% advanced=true
@@ -446,7 +446,7 @@ namespace valon {
          * @param pixeloffset position of the NeoPixel in the eyes. eg:1
          * @param rgb RGB color of the LED. eg:255
          */
-        //% blockId="eyes_set_pixel_color" block="%eyes|set pixel color at %pixeloffset|to %rgb"
+        //% blockId="eyes_set_pixel_color" block="%eyes|set pixel color at %pixeloffset|to %rgb=neopixel_colors"
         //% eyes.defl=eyes
         //% weight=38
         setPixelColor(pixeloffset: number, rgb: number): void {
