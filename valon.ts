@@ -18,6 +18,11 @@ let alreadyInit = 0
 let IrPressEvent = 0
 const MOTER_ADDRESSS = 0x10
 
+// ultrasonic pin
+let valonUltrasonicTrig = DigitalPin.P5
+let valonUltrasonicEcho = DigitalPin.P11
+let distanceBuf = 0
+
 enum PingUnit {
     //% block="cm"
     Centimeters,
@@ -101,29 +106,20 @@ namespace valon {
     }
 
     /**
-     * Read ultrasonic sensor.
+     * Turn on/off the LEDs.
      */
-    //% blockId=ultrasonic_sensor block="read ultrasonic sensor |%unit "
-    //% weight=95
-    export function Ultrasonic(unit: PingUnit, maxCmDistance = 500): number {
-        let d
-        pins.digitalWritePin(DigitalPin.P1, 0);
-        if (pins.digitalReadPin(DigitalPin.P2) == 0) {
-            pins.digitalWritePin(DigitalPin.P1, 1);
-            pins.digitalWritePin(DigitalPin.P1, 0);
-            d = pins.pulseIn(DigitalPin.P2, PulseValue.High, maxCmDistance * 58);
+    //% weight=120
+    //% blockId=writeLED block="LEDlight |%ledn turn |%ledswitch"
+    //% ledn.fieldEditor="gridpicker" ledn.fieldOptions.columns=2 
+    //% ledswitch.fieldEditor="gridpicker" ledswitch.fieldOptions.columns=2
+    export function writeLED(ledn: LED, ledswitch: LEDswitch): void {
+        led.enable(false);
+        if (ledn == LED.LEDLeft) {
+            pins.digitalWritePin(DigitalPin.P10, ledswitch);
+        } else if (ledn == LED.LEDRight) {
+            pins.digitalWritePin(DigitalPin.P9, ledswitch);
         } else {
-            pins.digitalWritePin(DigitalPin.P1, 0);
-            pins.digitalWritePin(DigitalPin.P1, 1);
-            d = pins.pulseIn(DigitalPin.P2, PulseValue.Low, maxCmDistance * 58);
-        }
-        let x = d / 39;
-        if (x <= 0 || x > 500) {
-            return 0;
-        }
-        switch (unit) {
-            case PingUnit.Centimeters: return Math.round(x);
-            default: return Math.idiv(d, 2.54);
+            return
         }
     }
 
@@ -191,22 +187,37 @@ namespace valon {
 
     }
 
-
     /**
-     * Turn on/off the LEDs.
+     * Read ultrasonic sensor.
      */
+    //% blockId=ultrasonic_sensor block="read ultrasonic sensor |%unit "
+    //% weight=80
+    export function Ultrasonic(unit: PingUnit, maxCmDistance = 500): number {
+        let d
+        // send pulse
+        pins.setPull(valonUltrasonicTrig, PinPullMode.PullNone);
+        pins.digitalWritePin(valonUltrasonicTrig, 0);
+        control.waitMicros(2);
+        pins.digitalWritePin(valonUltrasonicTrig, 1);
+        control.waitMicros(10);
+        pins.digitalWritePin(valonUltrasonicTrig, 0);
 
-    //% weight=20
-    //% blockId=writeLED block="LEDlight |%led turn |%ledswitch"
-    //% led.fieldEditor="gridpicker" led.fieldOptions.columns=2 
-    //% ledswitch.fieldEditor="gridpicker" ledswitch.fieldOptions.columns=2
-    export function writeLED(led: LED, ledswitch: LEDswitch): void {
-        if (led == LED.LEDLeft) {
-            pins.digitalWritePin(DigitalPin.P8, ledswitch)
-        } else if (led == LED.LEDRight) {
-            pins.digitalWritePin(DigitalPin.P12, ledswitch)
-        } else {
-            return
+        // read pulse
+        // d = pins.pulseIn(valonUltrasonicEcho, PulseValue.High, maxCmDistance * 58);  // 8 / 340 = 
+        d = pins.pulseIn(valonUltrasonicEcho, PulseValue.High, 25000);
+        let ret = d;
+        // filter timeout spikes
+        if (ret == 0 && distanceBuf != 0) {
+            ret = distanceBuf;
         }
+        distanceBuf = d;
+
+        return Math.floor(ret * 9 / 6 / 58);
+        // switch (unit) {
+        //     case ValonPingUnit.Centimeters: return Math.idiv(d, 58);
+        //     default: return d;
+        // }
     }
+
+
 }
