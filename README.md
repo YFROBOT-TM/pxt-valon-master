@@ -1,15 +1,15 @@
  
 # Valon
 
-[Valon is an easy-to-use programming educational Robot](http://www.yfrobot.com)
+[Valon is an easy-to-use programming educational Robot](http://www.yfrobot.com/wiki/index.php?title=Valon-I)
 
 ## Basic usage
 
 * Set the direction and speed of Valon motor
 
 ```blocks
- valon.motorRun(valon.Motors.M1, valon.Dir.CW, 120)
- valon.motorRun(valon.Motors.M2, valon.Dir.CCW, 120)
+ valon.motorRun(valon.Motors.ML, valon.Dir.CW, 120)
+ valon.motorRun(valon.Motors.MR, valon.Dir.CCW, 120)
 ```
 
 * Read ultrasonic sensor
@@ -21,7 +21,7 @@ basic.showNumber(valon.Ultrasonic(PingUnit.Centimeters))
 * Stop the Valon motor 
 
 ```blocks
-valon.motorStop(valon.Motors.M1)
+valon.motorStop(valon.Motors.ML)
 ```
 
 * Read line tracking sensor

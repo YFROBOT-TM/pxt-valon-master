@@ -9,7 +9,6 @@
  * @author [email](yfrobot@qq.com)
  * @date  2020-07-22
 */
-
 let valoncb: Action
 let valonmycb: Action
 let valone = "1"
@@ -119,7 +118,7 @@ namespace valon {
     /**
      * Different modes for RGB or RGB+W NeoPixel strips
      */
-    enum EyesMode {
+    export enum EyesMode {
         //% block="GRB"
         RGB = 1,
         //% block="RGB"
@@ -518,6 +517,7 @@ namespace valon {
     /**
      *  Create a new NeoPixel driver for eye's LEDs.
      *  @param numleds number of leds in the eyes, eg: 2
+     *  @param mode rgb mode, eg: valon.EyesMode.RGB
      */
     //% blockId="eyes_create" block="RGBEyes init %numleds|leds as %mode"
     //% weight=62  
@@ -696,7 +696,7 @@ namespace valon {
 
     /**
      * Connects to the IR receiver module at the specified pin and configures the IR protocol.
-     * @param pin IR receiver pin. eg: DigtialPin.P3
+     * @param pin IR receiver pin. eg: DigitalPin.P3
      * @param protocol IR protocol. eg: valon.IrProtocol.NEC
      */
     //% subcategory="IR Receiver"
