@@ -18,12 +18,6 @@
 basic.showNumber(valon.Ultrasonic(PingUnit.Centimeters))
 ```
 
-* Set the  Valon servos 
-
-```blocks
-valon.servoRun(valon.Servos.S1, 90)
-```
-
 * Stop the Valon motor 
 
 ```blocks
@@ -45,14 +39,9 @@ valon.writeLED(valon.LED.LEDLeft, valon.LEDswitch.turnOn)
 * Read IR sensor value
 
 ```blocks
-basic.showNumber(valon.IR_read())
+basic.showNumber(valon.irButtonCode())
 ```
 
-* Read the version number
-
-```blocks
-basic.showString(valon.IR_read_version())
-```
 
 ## License
 
