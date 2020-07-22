@@ -449,7 +449,6 @@ namespace valon {
         //% blockId="eyes_set_pixel_color" block="%eyes|set pixel color at %pixeloffset|to %rgb"
         //% eyes.defl=eyes
         //% weight=38
-        //% advanced=true
         setPixelColor(pixeloffset: number, rgb: number): void {
             this.setPixelRGB(pixeloffset >> 0, rgb >> 0);
         }
@@ -539,7 +538,6 @@ namespace valon {
     */
     //% weight=30  
     //% blockId="eyes_colors" block="%color"
-    //% advanced=true
     export function colors(color: EyesColors): number {
         return color;
     }
@@ -552,7 +550,6 @@ namespace valon {
      */
     //% weight=26
     //% blockId="eyes_rgb" block="red %red|green %green|blue %blue"
-    //% advanced=true
     export function rgb(red: number, green: number, blue: number): number {
         return packRGB(red, green, blue);
     }
