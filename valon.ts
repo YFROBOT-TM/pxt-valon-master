@@ -1,6 +1,6 @@
 /** 
  * @file pxt-valon/valon.ts
- * @brief DFRobot's VALON makecode library.
+ * @brief YFROBOT's VALON makecode library.
  * @n This is a MakeCode graphical programming education robot.
  * 
  * @copyright    YFROBOT,2020
@@ -125,7 +125,6 @@ namespace valon {
             case PingUnit.Centimeters: return Math.round(x);
             default: return Math.idiv(d, 2.54);
         }
-
     }
 
     /**
