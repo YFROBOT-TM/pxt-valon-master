@@ -420,7 +420,6 @@ namespace valon {
         //% blockId="eyes_show" block="%eyes|show" 
         //% eyes.defl=eyes
         //% weight=35
-        //% advanced=true
         show() {
             // only supported in beta
             // ws2812b.setBufferMode(this.pin, this._mode);
@@ -429,7 +428,7 @@ namespace valon {
 
         /**
          * Shows all LEDs to a given color (range 0-255 for r, g, b).
-         * @param rgb RGB color of the LED
+         * @param rgb RGB color of the LED. eg:255
          */
         //% blockId="eyes_set_color" block="%eyes|show color %rgb"
         //% eyes.defl=eyes
@@ -444,8 +443,8 @@ namespace valon {
         /**
          * Set LED to a given color (range 0-255 for r, g, b).
          * You need to call ``show`` to make the changes visible.
-         * @param pixeloffset position of the NeoPixel in the eyes
-         * @param rgb RGB color of the LED
+         * @param pixeloffset position of the NeoPixel in the eyes. eg:1
+         * @param rgb RGB color of the LED. eg:255
          */
         //% blockId="eyes_set_pixel_color" block="%eyes|set pixel color at %pixeloffset|to %rgb"
         //% eyes.defl=eyes

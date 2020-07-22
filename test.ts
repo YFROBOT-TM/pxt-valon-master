@@ -15,11 +15,4 @@ eyes.show()
 valon.colors(valon.EyesColors.Red)
 valon.rgb(255, 255, 255)
 valon.hsl(100, 50, 50)
-valon.connectIrReceiver(DigitalPin.P3, valon.IrProtocol.NEC)
-valon.onIrButton(valon.IrButton.UP, valon.IrButtonAction.Pressed, function () {
-    
-})
-valon.irButton()
 
-valon.wasAnyIrButtonPressed()
-valon.irButtonCode(valon.IrButton.UP)
