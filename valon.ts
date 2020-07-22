@@ -18,21 +18,31 @@ let alreadyInit = 0
 let IrPressEvent = 0
 const MOTER_ADDRESSS = 0x10
 
+
 // ultrasonic pin
 let valonUltrasonicTrig = DigitalPin.P5
 let valonUltrasonicEcho = DigitalPin.P11
 let distanceBuf = 0
+// motor pin 
+let valonMotorLD = DigitalPin.P13
+let valonMotorLA = AnalogPin.P14
+let valonMotorRD = DigitalPin.P15
+let valonMotorRA = AnalogPin.P16
+// patrol pin
+let valonPatrolLeft = DigitalPin.P1
+let valonPatrolMiddle = DigitalPin.P2
+let valonPatrolRight = DigitalPin.P8
 
 enum PingUnit {
     //% block="cm"
     Centimeters,
 }
 enum state {
-        state1=0x10,
-        state2=0x11,
-        state3=0x20,
-        state4=0x21
-    }
+    state1 = 0x10,
+    state2 = 0x11,
+    state3 = 0x20,
+    state4 = 0x21
+}
 interface KV {
     key: state;
     action: Action;
@@ -50,18 +60,11 @@ namespace valon {
 
     export enum Motors {
         //% blockId="left motor" block="left"
-        M1 = 0,
+        ML = 0,
         //% blockId="right motor" block="right"
-        M2 = 1,
+        MR = 1,
         //% blockId="all motor" block="all"
-        All = 2
-    }
-
-    export enum Servos {
-        //% blockId="S1" block="S1"
-        S1 = 0,
-        //% blockId="S2" block="S2"
-        S2 = 1
+        MAll = 2
     }
 
     export enum Dir {
@@ -73,29 +76,18 @@ namespace valon {
 
     export enum Patrol {
         //% blockId="patrolLeft" block="left"
-        PatrolLeft = 13,
+        PatrolLeft = 1,
+        //% blockId="patrolMiddle" block="middle"
+        PatrolMiddle = 2,
         //% blockId="patrolRight" block="right"
-        PatrolRight = 14
-    }
-
-    export enum Patrol1 {
-        //% blockId="patrolLeft" block="left"
-        PatrolLeft = 0x10,
-        //% blockId="patrolRight" block="right"
-        PatrolRight = 0x20
-    }
-    export enum Voltage {
-        //%block="high"
-        High = 0x01,
-        //% block="low"
-        Low = 0x00
+        PatrolRight = 8
     }
 
     export enum LED {
         //% blockId="LEDLeft" block="left"
-        LEDLeft = 8,
+        LEDLeft = 10,
         //% blockId="LEDRight" block="right"
-        LEDRight = 12
+        LEDRight = 9
     }
 
     export enum LEDswitch {
@@ -123,68 +115,49 @@ namespace valon {
         }
     }
 
+    function clamp(value: number, min: number, max: number): number {
+        return Math.max(Math.min(max, value), min);
+    }
+
     /**
      * Set the direction and speed of Valon motor.
+     * @param index motor left/right/all
+     * @param direction direction to turn
+     * @param speed speed of motors (0 to 255). eg: 120
      */
     //% weight=90
-    //% blockId=motor_MotorRun block="motor|%index|move|%Dir|at speed|%speed"
+    //% blockId=motor_MotorRun block="motor|%index|move|%direction|at speed|%speed"
     //% speed.min=0 speed.max=255
     //% index.fieldEditor="gridpicker" index.fieldOptions.columns=2
     //% direction.fieldEditor="gridpicker" direction.fieldOptions.columns=2
     export function motorRun(index: Motors, direction: Dir, speed: number): void {
-        let buf = pins.createBuffer(3);
-        if (index == 0) {
-            buf[0] = 0x00;
-            buf[1] = direction;
-            buf[2] = speed;
-            pins.i2cWriteBuffer(0x10, buf);
-        }
-        if (index == 1) {
-            buf[0] = 0x02;
-            buf[1] = direction;
-            buf[2] = speed;
-            pins.i2cWriteBuffer(0x10, buf);
-        }
-        if (index == 2) {
-            buf[0] = 0x00;
-            buf[1] = direction;
-            buf[2] = speed;
-            pins.i2cWriteBuffer(0x10, buf);
-            buf[0] = 0x02;
-            pins.i2cWriteBuffer(0x10, buf);
+        if (index > 2 || index < 0)
+            return
+
+        speed = clamp(speed, 0, 255) * 4.01;  // 0~255 > 0~1023
+
+        if (index == valon.Motors.ML) {
+            pins.digitalWritePin(valonMotorLD, direction);
+            pins.analogWritePin(valonMotorLA, speed);
+        } else if (index == Motors.MR) {
+            pins.digitalWritePin(valonMotorRD, direction);
+            pins.analogWritePin(valonMotorRA, speed);
+        } else if (index == Motors.MAll) {
+            pins.digitalWritePin(valonMotorRD, direction);
+            pins.analogWritePin(valonMotorRA, speed);
+            pins.digitalWritePin(valonMotorLD, direction);
+            pins.analogWritePin(valonMotorLA, speed);
         }
     }
 
     /**
      * Stop the Valon motor.
      */
-    //% weight=20
-    //% blockId=motor_motorStop block="motor |%motors stop"
-    //% motors.fieldEditor="gridpicker" motors.fieldOptions.columns=2 
-    export function motorStop(motors: Motors): void {
-        let buf = pins.createBuffer(3);
-        if (motors == 0) {
-            buf[0] = 0x00;
-            buf[1] = 0;
-            buf[2] = 0;
-            pins.i2cWriteBuffer(0x10, buf);
-        }
-        if (motors == 1) {
-            buf[0] = 0x02;
-            buf[1] = 0;
-            buf[2] = 0;
-            pins.i2cWriteBuffer(0x10, buf);
-        }
-
-        if (motors == 2) {
-            buf[0] = 0x00;
-            buf[1] = 0;
-            buf[2] = 0;
-            pins.i2cWriteBuffer(0x10, buf);
-            buf[0] = 0x02;
-            pins.i2cWriteBuffer(0x10, buf);
-        }
-
+    //% weight=89
+    //% blockId=motor_motorStop block="motor |%motor stop"
+    //% motor.fieldEditor="gridpicker" motor.fieldOptions.columns=2 
+    export function motorStop(motor: Motors): void {
+        motorRun(motor, 0, 0);
     }
 
     /**
@@ -217,6 +190,33 @@ namespace valon {
         //     case ValonPingUnit.Centimeters: return Math.idiv(d, 58);
         //     default: return d;
         // }
+    }
+
+    /**
+      * enable line tracking sensor.
+      */
+     function enablePatrol(enable: number): void {
+        pins.digitalWritePin(DigitalPin.P12, enable);
+     }
+    
+    /**
+      * Read line tracking sensor.
+      * @param patrol patrol sensor number.
+      */
+    //% weight=70
+    //% blockId=valon_read_Patrol block="read %patrol line tracking sensor"
+    //% patrol.fieldEditor="gridpicker" patrol.fieldOptions.columns=2 
+    export function readPatrol(patrol: Patrol): number {
+        enablePatrol(1);
+        if (patrol == Patrol.PatrolLeft) {
+            return pins.digitalReadPin(valonPatrolLeft)
+        } else if (patrol == Patrol.PatrolMiddle) {
+            return pins.digitalReadPin(valonPatrolMiddle)
+        } else if (patrol == Patrol.PatrolRight) {
+            return pins.digitalReadPin(valonPatrolRight)
+        } else {
+            return -1
+        }
     }
 
 
