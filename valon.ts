@@ -33,7 +33,7 @@ interface KV {
     action: Action;
 }
 
-//% weight=10 color=#008B00 icon="\uf136" block="Valon"
+//% color="#7BD239" weight=10 icon="\uf1b0" block="Valon"
 namespace valon {
 
     let kbCallback: KV[] = []
