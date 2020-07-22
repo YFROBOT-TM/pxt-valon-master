@@ -415,10 +415,10 @@ namespace valon {
         }
 
         /**
-         * Send all the changes to the strip.
+         * Send all the changes to the eyes.
          */
-        //% blockId="eyes_show" block="%strip|show" 
-        //% strip.defl=strip
+        //% blockId="eyes_show" block="%eyes|show" 
+        //% strip.defl=eyes
         //% weight=35
         //% advanced=true
         show() {
@@ -431,8 +431,8 @@ namespace valon {
          * Shows all LEDs to a given color (range 0-255 for r, g, b).
          * @param rgb RGB color of the LED
          */
-        //% blockId="eyes_set_strip_color" block="%strip|show color %rgb=neopixel_colors"
-        //% strip.defl=strip
+        //% blockId="eyes_set_strip_color" block="%eyes|show color %rgb=neopixel_colors"
+        //% strip.defl=eyes
         //% weight=40
         //% advanced=true
         showColor(rgb: number) {
@@ -444,11 +444,11 @@ namespace valon {
         /**
          * Set LED to a given color (range 0-255 for r, g, b).
          * You need to call ``show`` to make the changes visible.
-         * @param pixeloffset position of the NeoPixel in the strip
+         * @param pixeloffset position of the NeoPixel in the eyes
          * @param rgb RGB color of the LED
          */
-        //% blockId="eyes_set_pixel_color" block="%strip|set pixel color at %pixeloffset|to %rgb=neopixel_colors"
-        //% strip.defl=strip
+        //% blockId="eyes_set_pixel_color" block="%eyes|set pixel color at %pixeloffset|to %rgb=neopixel_colors"
+        //% strip.defl=eyes
         //% weight=38
         //% advanced=true
         setPixelColor(pixeloffset: number, rgb: number): void {

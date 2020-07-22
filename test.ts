@@ -6,3 +6,5 @@ basic.pause(1000)
 
 let eyes = valon.create(2, valon.EyesMode.RGB)
 valon.connectIrReceiver(DigitalPin.P3, valon.IrProtocol.NEC)
+eyes.showColor(0)
+valon.irButton()
