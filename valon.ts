@@ -376,10 +376,10 @@ namespace valon {
         /**
          * Set LED to a given color (range 0-255 for r, g, b).
          * @param eyes_n position of the NeoPixel in the strip
-         * @param rgb RGB color of the LED. eg: ValonEyesColors.red
+         * @param rgb RGB color of the LED. eg: valon.EyesColors.Red
          */
         //% blockId="set_eyes_color" block="%eyes|show color at %eyes_n|to %rgb"
-        //% strip.defl=eyes
+        //% eyes.defl=eyes
         //% weight=60
         setEyesColor(eyes_n: RGBEYES, rgb: EyesColors): void {
             if (eyes_n == RGBEYES.EyesAll) {
@@ -396,7 +396,7 @@ namespace valon {
          * @param brightness a measure of LED brightness in 0-255. eg: 255
          */
         //% blockId="eyes_set_brightness" block="%eyes|set brightness %brightness" 
-        //% strip.defl=eyes
+        //% eyes.defl=eyes
         //% weight=58
         setBrightness(brightness: number): void {
             this.brightness = brightness & 0xff;
@@ -407,7 +407,7 @@ namespace valon {
          * You need to call ``show`` to make the changes visible.
          */
         //% blockId="eyes_clear" block="%eyes|clear"
-        //% strip.defl=eyes
+        //% eyes.defl=eyes
         //% weight=55
         clear(): void {
             const stride = this._mode === EyesMode.RGBW ? 4 : 3;
@@ -418,7 +418,7 @@ namespace valon {
          * Send all the changes to the eyes.
          */
         //% blockId="eyes_show" block="%eyes|show" 
-        //% strip.defl=eyes
+        //% eyes.defl=eyes
         //% weight=35
         //% advanced=true
         show() {
@@ -431,8 +431,8 @@ namespace valon {
          * Shows all LEDs to a given color (range 0-255 for r, g, b).
          * @param rgb RGB color of the LED
          */
-        //% blockId="eyes_set_strip_color" block="%eyes|show color %rgb=neopixel_colors"
-        //% strip.defl=eyes
+        //% blockId="eyes_set_color" block="%eyes|show color %rgb=neopixel_colors"
+        //% eyes.defl=eyes
         //% weight=40
         //% advanced=true
         showColor(rgb: number) {
@@ -448,7 +448,7 @@ namespace valon {
          * @param rgb RGB color of the LED
          */
         //% blockId="eyes_set_pixel_color" block="%eyes|set pixel color at %pixeloffset|to %rgb=neopixel_colors"
-        //% strip.defl=eyes
+        //% eyes.defl=eyes
         //% weight=38
         //% advanced=true
         setPixelColor(pixeloffset: number, rgb: number): void {
