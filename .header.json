@@ -1,0 +1,20 @@
+{
+    "target": "microbit",
+    "targetVersion": "3.0.20",
+    "name": "maqueen",
+    "meta": {},
+    "editor": "tsprj",
+    "pubId": "",
+    "pubCurrent": false,
+    "_rev": null,
+    "id": "25e7d13d-ef96-4982-e599-8b2509bc2890",
+    "recentUse": 1595389650,
+    "modificationTime": 1595385809,
+    "blobId": null,
+    "blobVersion": null,
+    "blobCurrent": false,
+    "isDeleted": false,
+    "path": "pxt-maqueen-master",
+    "githubCurrent": false,
+    "saveId": null
+}
