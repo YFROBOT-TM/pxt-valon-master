@@ -361,43 +361,6 @@ namespace valon {
         }
     }
 
-
-    /**
-     *  Create a new NeoPixel driver for eye's LEDs.
-     *  @param numleds number of leds in the eyes, eg: 2
-     */
-    //% blockId="eyes_create" block="RGBEyes init %numleds|leds as %mode"
-    //% weight=62  
-    //% blockSetVariable=eyes
-    export function create(numleds: number, mode: EyesMode): Strip {
-        let eyes = new Strip();
-        let stride = mode === EyesMode.RGBW ? 4 : 3;
-        eyes.buf = pins.createBuffer(numleds * stride);
-        eyes.start = 0;
-        eyes._length = numleds;
-        eyes._mode = mode || EyesMode.RGB;
-        eyes._matrixWidth = 0;
-        eyes.setBrightness(128)
-        eyes.setPin(valonEyesPin)
-        return eyes;
-    }
-
-    function packRGB(a: number, b: number, c: number): number {
-        return ((a & 0xFF) << 16) | ((b & 0xFF) << 8) | (c & 0xFF);
-    }
-    function unpackR(rgb: number): number {
-        let r = (rgb >> 16) & 0xFF;
-        return r;
-    }
-    function unpackG(rgb: number): number {
-        let g = (rgb >> 8) & 0xFF;
-        return g;
-    }
-    function unpackB(rgb: number): number {
-        let b = (rgb) & 0xFF;
-        return b;
-    }
-
     /**
      * A NeoPixel strip
      */
@@ -552,6 +515,25 @@ namespace valon {
         }
     }
 
+    /**
+     *  Create a new NeoPixel driver for eye's LEDs.
+     *  @param numleds number of leds in the eyes, eg: 2
+     */
+    //% blockId="eyes_create" block="RGBEyes init %numleds|leds as %mode"
+    //% weight=62  
+    //% blockSetVariable=eyes
+    export function create(numleds: number, mode: EyesMode): Strip {
+        let eyes = new Strip();
+        let stride = mode === EyesMode.RGBW ? 4 : 3;
+        eyes.buf = pins.createBuffer(numleds * stride);
+        eyes.start = 0;
+        eyes._length = numleds;
+        eyes._mode = mode || EyesMode.RGB;
+        eyes._matrixWidth = 0;
+        eyes.setBrightness(128)
+        eyes.setPin(valonEyesPin)
+        return eyes;
+    }
 
     /**
     * Gets the RGB value of a known color
@@ -574,6 +556,22 @@ namespace valon {
     //% advanced=true
     export function rgb(red: number, green: number, blue: number): number {
         return packRGB(red, green, blue);
+    }
+
+    function packRGB(a: number, b: number, c: number): number {
+        return ((a & 0xFF) << 16) | ((b & 0xFF) << 8) | (c & 0xFF);
+    }
+    function unpackR(rgb: number): number {
+        let r = (rgb >> 16) & 0xFF;
+        return r;
+    }
+    function unpackG(rgb: number): number {
+        let g = (rgb >> 8) & 0xFF;
+        return g;
+    }
+    function unpackB(rgb: number): number {
+        let b = (rgb) & 0xFF;
+        return b;
     }
 
     /**
