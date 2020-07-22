@@ -100,54 +100,6 @@ namespace maqueen {
         turnOff = 0x00
     }
 
-    //% advanced=true shim=maqueenIR::initIR
-    function initIR(pin: Pins): void {
-        return
-    }
-
-    //% advanced=true shim=maqueenIR::onPressEvent
-    function onPressEvent(btn: RemoteButton, body: Action): void {
-        return
-    }
-
-    //% advanced=true shim=maqueenIR::getParam
-    function IR_callbackUser(): number {
-        return 0
-    }
-
-    function maqueenInit(): void {
-        if (alreadyInit == 1) {
-            return
-        }
-        initIR(Pins.P16)
-        alreadyInit = 1
-    }
-
-    /**
-     * Read the version number.
-     */
-
-    //% weight=10
-    //% blockId=IR_read_version block="get product information"
-    export function IR_read_version(): string {
-        maqueenInit()
-        pins.i2cWriteNumber(0x10, 50, NumberFormat.UInt8BE);
-        let dataLen = pins.i2cReadNumber(0x10, NumberFormat.UInt8BE);
-        pins.i2cWriteNumber(0x10, 51, NumberFormat.UInt8BE);
-        let buf = pins.i2cReadBuffer(0x10, dataLen, false);
-        let version = "";
-        for (let index = 0; index < dataLen; index++) {
-            version += String.fromCharCode(buf[index])
-        }
-        return version
-    }
-
-    function IR_callback(a: Action): void {
-        maqueencb = a
-        IrPressEvent += 1
-        onPressEvent(IrPressEvent, maqueencb)
-    }
-
     /**
      * Read ultrasonic sensor.
      */
@@ -242,22 +194,6 @@ namespace maqueen {
 
     }
 
-    /**
-     * Read line tracking sensor.
-     */
-
-    //% weight=20
-    //% blockId=read_Patrol block="read |%patrol line tracking sensor"
-    //% patrol.fieldEditor="gridpicker" patrol.fieldOptions.columns=2 
-    export function readPatrol(patrol: Patrol): number {
-        if (patrol == Patrol.PatrolLeft) {
-            return pins.digitalReadPin(DigitalPin.P13)
-        } else if (patrol == Patrol.PatrolRight) {
-            return pins.digitalReadPin(DigitalPin.P14)
-        } else {
-            return -1
-        }
-    }
 
     /**
      * Turn on/off the LEDs.
@@ -276,65 +212,4 @@ namespace maqueen {
             return
         }
     }
-
-    /**
-     * Set the Maqueen servos.
-     */
-
-    //% weight=90
-    //% blockId=servo_ServoRun block="servo|%index|angle|%angle"
-    //% angle.min=0 angle.max=180
-    //% index.fieldEditor="gridpicker" index.fieldOptions.columns=2
-    export function servoRun(index: Servos, angle: number): void {
-        let buf = pins.createBuffer(2);
-        if (index == 0) {
-            buf[0] = 0x14;
-        }
-        if (index == 1) {
-            buf[0] = 0x15;
-        }
-        buf[1] = angle;
-        pins.i2cWriteBuffer(0x10, buf);
-    }
-
-     /**
-     * Line tracking sensor event function
-     */
-    //% weight=2
-    //% blockId=kb_event block="on|%value line tracking sensor|%vi"
-    export function ltEvent(value: Patrol1, vi: Voltage, a: Action) {
-         let state = value + vi;
-        serial.writeNumber(state)
-        let item: KV = { key: state, action: a };
-        kbCallback.push(item);
-    }
-    let x:number
-    let i:number = 1;
-    function patorlState():number{
-        switch(i){
-            case 1: x = pins.digitalReadPin(DigitalPin.P13) == 0 ? 0x10:0;break;
-            case 2: x = pins.digitalReadPin(DigitalPin.P13) == 1 ? 0x11:0;break;
-            case 3: x = pins.digitalReadPin(DigitalPin.P14) == 0 ? 0x20:0;break;
-            default:x = pins.digitalReadPin(DigitalPin.P14) == 1 ? 0x21:0;break;
-        }
-        i+=1;
-        if(i==5)i=1;
-        
-        return x;
-    }
-
-     basic.forever(() => {
-        if (kbCallback != null) {
-            let sta = patorlState();
-            if (sta != 0) {
-                for (let item of kbCallback) {
-                    if (item.key == sta) {
-                        item.action();
-                    }
-                }
-            }
-        }
-        basic.pause(50);
-    })
-
 }
