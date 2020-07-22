@@ -1,14 +1,13 @@
 /** 
- * @file pxt-maqueen/maqueen.ts
- * @brief DFRobot's maqueen makecode library.
- * @n [Get the module here](https://www.dfrobot.com.cn/goods-1802.html)
+ * @file pxt-valon/valon.ts
+ * @brief DFRobot's VALON makecode library.
  * @n This is a MakeCode graphical programming education robot.
  * 
- * @copyright    [DFRobot](http://www.dfrobot.com), 2016
+ * @copyright    YFROBOT,2020
  * @copyright    MIT Lesser General Public License
  * 
- * @author [email](jie.tang@dfrobot.com)
- * @date  2019-10-08
+ * @author [email](yfrobot@qq.com)
+ * @date  2020-07-22
 */
 
 let maqueencb: Action
