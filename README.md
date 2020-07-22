@@ -1,11 +1,11 @@
  
-# Maqueen
+# Valon
 
-[Maqueen is an easy-to-use programming educational Robot](https://www.dfrobot.com.cn/goods-1802.html)
+[Valon is an easy-to-use programming educational Robot](http://www.yfrobot.com)
 
 ## Basic usage
 
-* Set the direction and speed of Maqueen motor
+* Set the direction and speed of Valon motor
 
 ```blocks
  valon.motorRun(valon.Motors.M1, valon.Dir.CW, 120)
@@ -18,13 +18,13 @@
 basic.showNumber(valon.Ultrasonic(PingUnit.Centimeters))
 ```
 
-* Set the  Maqueen servos 
+* Set the  Valon servos 
 
 ```blocks
 valon.servoRun(valon.Servos.S1, 90)
 ```
 
-* Stop the Maqueen motor 
+* Stop the Valon motor 
 
 ```blocks
 valon.motorStop(valon.Motors.M1)
@@ -58,7 +58,7 @@ basic.showString(valon.IR_read_version())
 
 MIT
 
-Copyright (c) 2018, microbit/micropython Chinese community  
+Copyright (c) 2020, microbit/micropython Chinese community  
 
 
 ## Supported targets
