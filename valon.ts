@@ -431,7 +431,7 @@ namespace valon {
          * Shows all LEDs to a given color (range 0-255 for r, g, b).
          * @param rgb RGB color of the LED. 
          */
-        //% blockId="eyes_set_color" block="%eyes|show color %rgb"
+        //% blockId="eyes_set_color" block="%eyes|show color %rgb=neopixel_colors"
         //% eyes.defl=eyes
         //% weight=40
         //% advanced=true
