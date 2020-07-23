@@ -77,11 +77,11 @@ namespace valon {
     }
 
     export enum Motors {
-        //% blockId="left motor" block="left"
+        //% blockId="leftMotor" block="left"
         ML = 0,
-        //% blockId="right motor" block="right"
+        //% blockId="rightMotor" block="right"
         MR = 1,
-        //% blockId="all motor" block="all"
+        //% blockId="allMotors" block="all"
         MAll = 2
     }
 
@@ -128,11 +128,11 @@ namespace valon {
     }
 
     export enum RGBEYES {
-        //% block="left"
+        //% blockId="RGBLEDLeft" block="left"
         EyesLeft = 1,
-        //% block="right"
+        //% blockId="RGBLEDLeft" block="right"
         EyesRight = 0,
-        //% block="all"
+        //% blockId="RGBLEDLeft" block="all"
         EyesAll = 2
     }
     /**
@@ -430,7 +430,7 @@ namespace valon {
          * Shows all LEDs to a given color (range 0-255 for r, g, b).
          * @param rgb RGB color of the LED. eg:255
          */
-        //% blockId="eyes_set_color" block="%eyes|show color %rgb=neopixel_colors"
+        //% blockId="eyes_set_color" block="%eyes|show color %rgb=valon_colors"
         //% eyes.defl=eyes
         //% weight=40
         //% advanced=true
@@ -446,7 +446,7 @@ namespace valon {
          * @param pixeloffset position of the NeoPixel in the eyes. eg:1
          * @param rgb RGB color of the LED. eg:255
          */
-        //% blockId="eyes_set_pixel_color" block="%eyes|set pixel color at %pixeloffset|to %rgb=neopixel_colors"
+        //% blockId="eyes_set_pixel_color" block="%eyes|set pixel color at %pixeloffset|to %rgb=valon_colors"
         //% eyes.defl=eyes
         //% weight=38
         setPixelColor(pixeloffset: number, rgb: number): void {
@@ -537,7 +537,7 @@ namespace valon {
     * Gets the RGB value of a known color
     */
     //% weight=30  
-    //% blockId="eyes_colors" block="%color"
+    //% blockId="valon_colors" block="%color"
     export function colors(color: EyesColors): number {
         return color;
     }
@@ -549,7 +549,7 @@ namespace valon {
      * @param blue value of the blue channel between 0 and 255. eg: 255
      */
     //% weight=26
-    //% blockId="eyes_rgb" block="red %red|green %green|blue %blue"
+    //% blockId="valon_rgb" block="red %red|green %green|blue %blue"
     export function rgb(red: number, green: number, blue: number): number {
         return packRGB(red, green, blue);
     }
