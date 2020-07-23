@@ -447,7 +447,7 @@ namespace valon {
          * @param pixeloffset position of the NeoPixel in the eyes. eg: 1
          * @param rgb RGB color of the LED. 
          */
-        //% blockId="eyes_set_pixel_color" block="%eyes|set pixel color at %pixeloffset|to %rgb=neopiexl_color"
+        //% blockId="eyes_set_pixel_color" block="%eyes|set pixel color at %pixeloffset|to %rgb=neopixel_colors"
         //% eyes.defl=eyes
         //% weight=38
         //% advanced=true

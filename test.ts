@@ -10,10 +10,10 @@ eyes.setEyesColor(valon.RGBEYES.EyesLeft, valon.EyesColors.Red)
 eyes.setBrightness(255)
 eyes.clear()
 eyes.showColor(0)
-eyes.setPixelColor(0, 0)
 valon.colors(valon.EyesColors.Red)
 eyes.show()
-valon.colors(valon.EyesColors.Red)
 valon.rgb(255, 255, 255)
 valon.hsl(100, 50, 50)
+eyes.setPixelColor(1, valon.colors(valon.EyesColors.Red))
+
 
