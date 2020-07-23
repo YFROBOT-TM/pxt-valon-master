@@ -428,9 +428,9 @@ namespace valon {
 
         /**
          * Shows all LEDs to a given color (range 0-255 for r, g, b).
-         * @param rgb RGB color of the LED. eg:255
+         * @param rgb RGB color of the LED. 
          */
-        //% blockId="eyes_set_color" block="%eyes|show color %rgb=valon_colors"
+        //% blockId="eyes_set_color" block="%eyes|show color %rgb=neopixel_colors"
         //% eyes.defl=eyes
         //% weight=40
         //% advanced=true
@@ -443,10 +443,10 @@ namespace valon {
         /**
          * Set LED to a given color (range 0-255 for r, g, b).
          * You need to call ``show`` to make the changes visible.
-         * @param pixeloffset position of the NeoPixel in the eyes. eg:1
-         * @param rgb RGB color of the LED. eg:255
+         * @param pixeloffset position of the NeoPixel in the eyes. 
+         * @param rgb RGB color of the LED. 
          */
-        //% blockId="eyes_set_pixel_color" block="%eyes|set pixel color at %pixeloffset|to %rgb=valon_colors"
+        //% blockId="eyes_set_pixel_color" block="%eyes|set pixel color at %pixeloffset|to %rgb=neopixel_colors"
         //% eyes.defl=eyes
         //% weight=38
         setPixelColor(pixeloffset: number, rgb: number): void {
@@ -537,7 +537,7 @@ namespace valon {
     * Gets the RGB value of a known color
     */
     //% weight=30  
-    //% blockId="valon_colors" block="%color"
+    //% blockId="neopixel_colors" block="%color"
     export function colors(color: EyesColors): number {
         return color;
     }
@@ -549,7 +549,7 @@ namespace valon {
      * @param blue value of the blue channel between 0 and 255. eg: 255
      */
     //% weight=26
-    //% blockId="valon_rgb" block="red %red|green %green|blue %blue"
+    //% blockId="neopixel_rgb" block="red %red|green %green|blue %blue"
     export function rgb(red: number, green: number, blue: number): number {
         return packRGB(red, green, blue);
     }
