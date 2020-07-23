@@ -18,7 +18,7 @@
     "valon.Patrol.PatrolMiddle|block": "中间",
     "valon.Patrol.PatrolRight|block": "右侧",
     "valon.create|block":"RGBEyes初始化 %numleds|颗LED,模式 %mode",
-    "valon.Strip.setEyesColor|block":"%eyes|在 %eyes_n|显示 %rgb",
+    "valon.Strip.setEyesColor|block":"%eyes|在 %eyes_n|显示 %rgb=neopixel_colors",
     "valon.RGBEYES.EyesLeft|block": "左侧",
     "valon.RGBEYES.EyesRight|block": "右侧",
     "valon.RGBEYES.EyesAll|block": "全部",

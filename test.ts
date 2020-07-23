@@ -6,7 +6,7 @@ basic.pause(1000)
 valon.motorStop(valon.Motors.MAll)
 
 let eyes = valon.create(2, valon.EyesMode.RGB)
-eyes.setEyesColor(valon.RGBEYES.EyesAll, valon.EyesColors.Red)
+eyes.setEyesColor(valon.RGBEYES.EyesLeft, valon.colors(valon.EyesColors.Red))
 eyes.setBrightness(255)
 basic.pause(1000)
 eyes.clear()
