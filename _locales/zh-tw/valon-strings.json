@@ -12,14 +12,12 @@
     "valon.Dir.CCW|block": "反轉",
     "valon.motorStop|block": "馬達 停止|%motors",
     "valon.Ultrasonic|block": "超音波距離|%unit",
-    "valon.readPatrol":"读取线跟踪传感器",
     "valon.readPatrol|block": "循跡感測器|%patrol",
     "valon.readPatrol|param|patrol":"循跡感測器位置",
     "valon.Patrol.PatrolLeft|block": "左側",
     "valon.Patrol.PatrolMiddle|block": "中間",
     "valon.Patrol.PatrolRight|block": "右側",
     "valon.create|block":"RGBEyes初始化 %numleds|颗LED,模式 %mode",
-    "valon.Strip.setEyesColor":"将LED设置为给定的颜色（r，g，b的范围为0-255）",
     "valon.Strip.setEyesColor|block":"%eyes|在 %eyes_n|显示 %rgb",
     "valon.RGBEYES.EyesLeft|block": "左侧",
     "valon.RGBEYES.EyesRight|block": "右侧",
@@ -45,9 +43,7 @@
     "valon.onIrButton|block": "当红外按键 %button| %action",
     "valon.IrButtonAction.pressed|block":"按下",
     "valon.IrButtonAction.released|block":"释放",
-    "valon.IR_callbackUser|block": "当接收到红外时运行",
     "valon.irButton|block": "红外按键值",
     "valon.wasAnyIrButtonPressed|block": "任意按键被按下",
-    "valon.irButtonCode|block": "红外按键%button|值",
-    "valon.IR_read_version|block": "獲取產品訊息"
+    "valon.irButtonCode|block": "红外按键%button|值"
 }
